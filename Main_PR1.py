@@ -20,6 +20,16 @@ dico_prenom = {
     'Giscard dEstaing': 'Valéry'
 }
 
+# Dictionnaire brut avec les noms des présidents et leurs dates d'élection
+presidents_et_dates = {
+    "Giscard dEstaing": 1974,
+    "Mitterrand": 1981,
+    "Chirac": 1995,
+    "Sarkozy": 2007,
+    "Hollande": 2012,
+    "Macron": 2017
+}
+
 #Programme principale 
 
 # Vérification du contenu du dossier 'cleaned'
@@ -87,97 +97,28 @@ contenue = dico_global_dossier("./cleaned") [1]
 
 print(extract_president_names(files_names))
 
-# 1 Afficher la liste des mots les moins importants dans le corpus de documents. Un mot est dit non important, si son TD-IDF = 0 dans tous les fichiers
-
-#Je veux les n mots les moins importants 
-
-def n_mot_moins_important(n):
-    if n <= 0:
-        return None
-    else:
-        liste_mot_moins_im_n = [] 
-        i = 1
-        for mot_p in dico_mot_im_trie.keys():
-            liste_mot_moins_im_n.append(mot_p)
-            if i == n:
-                return ("la liste des n mots les moins importants dans le corpus de documents sont: ",(liste_mot_moins_im_n))
-            i += 1
-
-    
-#print(n_mot_moins_important(25))
-
-# 2 Afficher le(s) mot(s) ayant le score TF-IDF le plus élevé
-
-def TF_IDF_eleve():
-    list_mot = list(dico_mot_im_trie)
-    return ("le mot ayant le score TF-IDF le plus élevé est ", list_mot[-1])
-#print(TF_IDF_eleve)
-
-# 3 Afficher le(s) mot(s) le(s) plus répété(s) par le président Chirac
-
-def word_chirac():
-    dico_chirac = dico_global_president("Chirac")
-    mot_max = max_dico_valeur(dico_chirac)
-    return ("Le mot le plus repete par le president Chirac dans le premier texte est", mot_max)
-
-#print(word_chirac())
-# 4. Indiquer le(s) nom(s) du (des) président(s) qui a (ont) parlé de la « Nation » et celui qui l’a répété le plus de fois
-
-def pr_nation():
-
-# On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
-    listes_president = []
-    dico_nation = {}
-    for i in files_names:
-        with open ("./cleaned/{}".format(i), 'r') as fichier:
-            contenu = fichier.read()
-        texte_nation = contenu.split()
-
-        nom_president = (i[11:-4])
-        if nom_president[-1] >= chr(48) and nom_president[-1] <= chr(57):
-            nom_president = nom_president[:-1]
-        if "nation" in texte_nation:
-            dico_mot = TF(contenu)
-            if not(nom_president in listes_president):
-                listes_president.append(nom_president)
-            if (nom_president in dico_nation.keys()):
-                dico_nation[nom_president] = dico_nation[nom_president] + dico_mot["nation"]
-            if not(nom_president in dico_nation.keys()):
-                dico_nation[nom_president] = dico_mot["nation"]
-    return ("Les presidents qui ont parlé du mot « Nation » sont",  listes_president, "et celui qui l'a repete le plus de fois est :",max_dico_valeur(dico_nation) )
-
-#print(pr_nation())
-
 # 5. Indiquer le premier président à parler du climat et/ou de l’écologie
 
 def one_president_climt():
-    dico_climat_eco = {}
+    liste_climat_eco = []
 
     for i in files_names:
         with open("./cleaned/{}".format(i), 'r') as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
             nom_president = (i[11:-4])
-            for index in range(len(texte_mot_cleaned)):
-                if texte_mot_cleaned[index] == "climat" or texte_mot_cleaned[index] == "écologie":
-                    if not nom_president in dico_climat_eco.keys():
-                        dico_climat_eco[nom_president] = index
-    return ("Le premier président à parler du climat et/ou de l’écologie est", min_dico_valeur(dico_climat_eco))
+            if ("climat") in texte_mot_cleaned or ("écologie") in texte_mot_cleaned:
+                if not nom_president in liste_climat_eco:
+                    liste_climat_eco.append(nom_president)
+    
+    min = liste_climat_eco[0]
+    for i in liste_climat_eco:
+        if presidents_et_dates[min] >  presidents_et_dates[i]:
+            min = i
+    return ("Le premier président à parler du climat et/ou de l’écologie est", min)
 
 #print(one_president_climt())
-
-# 6. Hormis les mots dits « non importants », quel(s) est(sont) le(s) mot(s) que tous les présidents ont évoqués.
-
-def mots_evoque_pr():
-    mots_evoque = []
-    for score in Score_TF_IDF_CLEANED:
-        if min_tab(Score_TF_IDF_CLEANED[score]) != 0:
-            mots_evoque.append(score)
-    return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
-
-#print(mots_evoque_pr())
 
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
-
