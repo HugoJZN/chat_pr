@@ -1,6 +1,5 @@
 import os
 import math
-#from Main_PR1 import dico_general
 
 
 # Fonctions importante
