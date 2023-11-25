@@ -21,19 +21,8 @@ def menu():
     print("-"*80)
 
     # Selon le choix de l'utilisateur, on appelle la fonction appropriée.
-    if choice == "1":
-        n = int(input("indiquez le nombre de valeurs que vous voulez du nombre de mot non importants dans le repertoire: "))
-        print(n_mot_moins_important(n))
-    elif choice == "2":
-        print(TF_IDF_eleve())
-    elif choice == "3":
-        print(word_chirac())
-    elif choice == "4":
+    if choice == "4":
         print(pr_nation())
-    elif choice == "5":
-        print(one_president_climt())
-    elif choice == "6":
-        print(mots_evoque_pr())
     elif choice.upper() == "\x1b":
         print("Au revoir")
         return
