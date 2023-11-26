@@ -134,3 +134,4 @@ def word_chirac():
     return ("Le mot le plus repete par le president Chirac dans le premier texte est", mot_max)
 
 #print(word_chirac())
+
