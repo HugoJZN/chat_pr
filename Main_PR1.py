@@ -125,3 +125,12 @@ def TF_IDF_eleve():
     list_mot = list(dico_mot_im_trie)
     return ("le mot ayant le score TF-IDF le plus élevé est ", list_mot[-1])
 #print(TF_IDF_eleve)
+
+# 3 Afficher le(s) mot(s) le(s) plus répété(s) par le président Chirac
+
+def word_chirac():
+    dico_chirac = dico_global_president("Chirac")
+    mot_max = max_dico_valeur(dico_chirac)
+    return ("Le mot le plus repete par le president Chirac dans le premier texte est", mot_max)
+
+#print(word_chirac())
