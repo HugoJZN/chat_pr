@@ -101,3 +101,21 @@ print(extract_president_names(files_names))
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# 1 Afficher la liste des mots les moins importants dans le corpus de documents. Un mot est dit non important, si son TD-IDF = 0 dans tous les fichiers
+
+#Je veux les n mots les moins importants 
+
+def n_mot_moins_important(n):
+    if n < 0:
+        return None
+    else:
+        liste_mot_moins_im_n = [] 
+        i = 0
+        for mot_p in dico_mot_im_trie.keys():
+            liste_mot_moins_im_n.append(mot_p)
+            if i == n:
+                return ("la liste des n mots les moins importants dans le corpus de documents sont: ",(liste_mot_moins_im_n))
+            i += 1
+
+    
+#print(n_mot_moins_important(25))
