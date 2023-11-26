@@ -162,4 +162,20 @@ def pr_nation():
 
 #print(pr_nation())
 
+# 5. Indiquer le premier président à parler du climat et/ou de l’écologie
 
+def one_president_climt():
+    dico_climat_eco = {}
+
+    for i in files_names:
+        with open("./cleaned/{}".format(i), 'r') as fichier:
+            contenu = fichier.read()
+            texte_mot_cleaned = contenu.split()
+            nom_president = (i[11:-4])
+            for index in range(len(texte_mot_cleaned)):
+                if texte_mot_cleaned[index] == "climat" or texte_mot_cleaned[index] == "écologie":
+                    if not nom_president in dico_climat_eco.keys():
+                        dico_climat_eco[nom_president] = index
+    return ("Le premier président à parler du climat et/ou de l’écologie est", min_dico_valeur(dico_climat_eco))
+
+#print(one_president_climt())
