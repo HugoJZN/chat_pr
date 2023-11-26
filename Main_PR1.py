@@ -135,3 +135,29 @@ def word_chirac():
 
 #print(word_chirac())
 
+# 4. Indiquer le(s) nom(s) du (des) président(s) qui a (ont) parlé de la « Nation » et celui qui l’a répété le plus de fois
+
+def pr_nation():
+
+# On créera un liste max qui prendra pour valeur le mot avec le plus d'occurences, on l'initialise à 0
+    listes_president = []
+    dico_nation = {}
+    for i in files_names:
+        with open ("./cleaned/{}".format(i), 'r') as fichier:
+            contenu = fichier.read()
+        texte_nation = contenu.split()
+
+        nom_president = (i[11:-4])
+        if nom_president[-1] >= chr(48) and nom_president[-1] <= chr(57):
+            nom_president = nom_president[:-1]
+        if "nation" in texte_nation:
+            dico_mot = TF(contenu)
+            if not(nom_president in listes_president):
+                listes_president.append(nom_president)
+            if (nom_president in dico_nation.keys()):
+                dico_nation[nom_president] = dico_nation[nom_president] + dico_mot["nation"]
+            if not(nom_president in dico_nation.keys()):
+                dico_nation[nom_president] = dico_mot["nation"]
+    return ("Les presidents qui ont parlé du mot « Nation » sont",  listes_president, "et celui qui l'a repete le plus de fois est :",max_dico_valeur(dico_nation) )
+
+#print(pr_nation())
