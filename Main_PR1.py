@@ -179,3 +179,14 @@ def one_president_climt():
     return ("Le premier président à parler du climat et/ou de l’écologie est", min_dico_valeur(dico_climat_eco))
 
 #print(one_president_climt())
+
+# 6. Hormis les mots dits « non importants », quel(s) est(sont) le(s) mot(s) que tous les présidents ont évoqués.
+
+def mots_evoque_pr():
+    mots_evoque = []
+    for score in Score_TF_IDF_CLEANED:
+        if min_tab(Score_TF_IDF_CLEANED[score]) != 0:
+            mots_evoque.append(score)
+    return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
+
+#print(mots_evoque_pr())
