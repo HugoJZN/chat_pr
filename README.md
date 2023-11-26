@@ -7,7 +7,6 @@ Lien directe vers le dépôt Git du projet :
 
 https://github.com/HugoJZN/chat_pr.git
 
-
 Notice d'utilisation du programme : 
 3 Fichiers:
 
