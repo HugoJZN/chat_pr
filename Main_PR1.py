@@ -119,3 +119,9 @@ def n_mot_moins_important(n):
 
     
 #print(n_mot_moins_important(25))
+# 2 Afficher le(s) mot(s) ayant le score TF-IDF le plus élevé
+
+def TF_IDF_eleve():
+    list_mot = list(dico_mot_im_trie)
+    return ("le mot ayant le score TF-IDF le plus élevé est ", list_mot[-1])
+#print(TF_IDF_eleve)
