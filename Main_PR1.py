@@ -1,6 +1,5 @@
 
 import os 
-import math
 from Fonctions import *
 
 # Variable importante 
