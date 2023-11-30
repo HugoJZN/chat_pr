@@ -62,3 +62,4 @@ def menu():
 
 # On appelle la fonction menu pour démarrer le programme.
 menu()
+

@@ -177,5 +177,11 @@ def max_dico_valeur(dico):
                 cle_max = cle
 
         return cle_max
+
+def somme(tab):
+    res = 0
+    for i in tab:
+        res += i
+    return res
     
 

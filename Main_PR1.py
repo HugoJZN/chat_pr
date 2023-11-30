@@ -39,7 +39,7 @@ contenue_dossier = os.listdir("./cleaned/")
 
 # Si le dossier 'cleaned' est vide, nettoyage des fichiers de 'speechees' et création de fichiers dans 'cleaned'
 
-if not(contenue_dossier): # Mettre les fichier de speech convertie dans cleaned
+if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cleaned
     #Parcour les differents fichiers de speechees
     for i in files_names:
         with open("./speeches/{}".format(i), "r") as fichier:
@@ -186,7 +186,8 @@ def mots_evoque_pr():
     mots_evoque = []
     for score in Score_TF_IDF_CLEANED:
         if min_tab(Score_TF_IDF_CLEANED[score]) != 0:
-            mots_evoque.append(score)
+            if somme(Score_TF_IDF_CLEANED[score]) >= 10:
+                mots_evoque.append(score)
     return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
 
 #print(mots_evoque_pr())
