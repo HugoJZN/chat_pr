@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "Menu.py",
+            "program": "Main_PR1.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
