@@ -46,11 +46,11 @@ if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cle
             texte = fichier.read()
         # Nettoyage des textes en convertissant en minuscules et supprimant la ponctuation
         # Création de nouveaux fichiers dans le dossier 'cleaned' avec le texte nettoyé
-        text_cleaned = " " 
+        text_cleaned = "" 
         for a in range(len(texte)):
             if ord(texte[a]) >= 65 and ord(texte[a]) <= 90:
                 text_cleaned += chr(ord(texte[a]) + 32)
-            elif (ord(texte[a]) >= 21 and ord(texte[a]) <=47) or (ord(texte[a]) >=58 and ord(texte[a])<= 64) or (texte[a])=="\n" :
+            if (ord(texte[a]) >= 21 and ord(texte[a]) <=47) or (ord(texte[a]) >=58 and ord(texte[a])<= 64) or (texte[a])=="\n" :
                 if text_cleaned[-1] != " ":
                     text_cleaned += " "
                 else:
@@ -94,7 +94,7 @@ contenue = dico_global_dossier("./cleaned") [1]
 
 #Affichage de la liste des noms des présidents
 
-print(extract_president_names(files_names))
+#print(extract_president_names(files_names))
 
 
 
