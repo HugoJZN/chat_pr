@@ -193,9 +193,6 @@ def mots_evoque_pr():
 #print(mots_evoque_pr())
 
 
-
-
-
 # Partie 2 du projet
 
 # 1. Tokenisation de la Question :
@@ -486,7 +483,7 @@ def generer_reponse(question, corpus):
 # Exemple d'utilisation
 
 
-question = "Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"
+question = "Peux-tu me dire comment une nation peut-elle prendre soin d'elle ?"
 document = calcul_document_plus_pertinent(question)
 reponse_affinee = generer_reponse(question, document )
 
@@ -498,6 +495,16 @@ print("Réponse affinée :", reponse_affinee)
 
 
 
+def partie2():
+
+    question = input(" Posez une question ")
+    document = calcul_document_plus_pertinent(question)
+    reponse_affinee = generer_reponse(question, document )
+
+    # Afficher le résultat
+
+    print("Question :", question)
+    print("Réponse affinée :", reponse_affinee)
 
 
 
