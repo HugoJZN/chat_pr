@@ -1,5 +1,6 @@
 
 import os 
+from math import*
 from Fonctions import *
 
 # Variable importante 
@@ -46,11 +47,11 @@ if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cle
             texte = fichier.read()
         # Nettoyage des textes en convertissant en minuscules et supprimant la ponctuation
         # Création de nouveaux fichiers dans le dossier 'cleaned' avec le texte nettoyé
-        text_cleaned = "" 
+        text_cleaned = " " 
         for a in range(len(texte)):
             if ord(texte[a]) >= 65 and ord(texte[a]) <= 90:
                 text_cleaned += chr(ord(texte[a]) + 32)
-            if (ord(texte[a]) >= 21 and ord(texte[a]) <=47) or (ord(texte[a]) >=58 and ord(texte[a])<= 64) or (texte[a])=="\n" :
+            elif (ord(texte[a]) >= 21 and ord(texte[a]) <=47) or (ord(texte[a]) >=58 and ord(texte[a])<= 64) or (texte[a])=="\n" :
                 if text_cleaned[-1] != " ":
                     text_cleaned += " "
                 else:
@@ -265,6 +266,11 @@ def TF_IDF_question(question):
     #Appel une focntion qui va donner l'ensemble des mots de la questions
     #Et une qui va donner l'ensemble des mots de chaque fichier ainsi que la valeur de son IDF
     mots_questions = tokenisation_question(question)
+
+    text = ""
+    for i in mots_questions:
+        text += i + " "
+
     mots_repertoire = IDF("cleaned")
     # On appel la fonction qui donne les mots présent dans la quetion et dans le document
     mot_question_documents = mot_question_et_document(question)
@@ -274,15 +280,9 @@ def TF_IDF_question(question):
 
         #On vérifie si le mot est présent à la fois dans la question et dans le texte
         if mots in mot_question_documents:
-            #On fait un boucle pour calculer le nombre d'occurences du mot dans la question
-            occ_mot = 0
-            for mot in mots_questions:
-                if mots == mot:
-                    occ_mot += 1
-            #On calcul le score TF du mot
-            score_TF = occ_mot/len(mots_questions)
+            score_TF = TF(text)
         #Si oui on calcul sa valeur et on l'ajoute au dico des vecteurs
-            vecteur_TF_IDF_question[mots] = score_TF * mots_repertoire[mots]
+            vecteur_TF_IDF_question[mots] = score_TF[mots] * mots_repertoire[mots]
 
         #Sinon sa valeur est égal à zéro
         else:
@@ -305,14 +305,14 @@ def norme_vecteur(A):
     somme = 0
     for i in A:
         somme = somme + (A[i])**2
-    somme = (somme)**(1/2)
+    somme = sqrt(somme)
     return somme
 
 def similarite_cosinus(A, B):
     produit_scalaire_ab = produit_scalaire(A, B)
     norme_a = norme_vecteur(A)
     norme_b = norme_vecteur(B)
-    res = (produit_scalaire_ab/(norme_a+norme_b))
+    res = (produit_scalaire_ab/(norme_a*norme_b))
     return res
 
 def transforme_dico(dico):
@@ -331,7 +331,9 @@ def transforme_dico(dico):
 # Exercice 5:  
 def calcul_document_plus_pertinent(question):
     TD_IDF_tous_fichier = transforme_dico(Score_TF_IDF_CLEANED)
+    print(Score_TF_IDF_CLEANED["climat"])
     TF_IDF_question1 = TF_IDF_question(question)
+    print(TF_IDF_question1["climat"])
     dico_similarite = {}
     for i in TD_IDF_tous_fichier:
             similarite = similarite_cosinus(TD_IDF_tous_fichier[i], TF_IDF_question1)
@@ -427,6 +429,9 @@ def dispose_score_mot_TF_IDF_du_doc(question, doc):
     liste_mot_doc_TF_IDF = []
     idx = 0
 
+    TF_IDF_question1 = TF_IDF_question(question)
+
+
     # Permet d'obtenir la position de du corpus dans la liste des fichiers que l'on pourrait reutiliser par la suite
     
     for index in range(len(files_names)):
@@ -439,7 +444,8 @@ def dispose_score_mot_TF_IDF_du_doc(question, doc):
         if i in Score_TF_IDF_CLEANED.keys():
             if int(Score_TF_IDF_CLEANED[i][idx]) != 0:
                 liste_mot_doc.append(i)
-                liste_mot_doc_TF_IDF.append(Score_TF_IDF_CLEANED[i][idx])
+                liste_mot_doc_TF_IDF.append(Score_TF_IDF_CLEANED[i][idx]*TF_IDF_question1[i])
+
     
     return liste_mot_doc, liste_mot_doc_TF_IDF
 
@@ -448,16 +454,23 @@ def dispose_score_mot_TF_IDF_du_doc(question, doc):
 def generer_reponse(question, corpus):
     # dispose le score des mots du doc pertinent dans une liste_mot et sion score Tf_idf
     liste_mot_doc, liste_mot_doc_TF_IDF = dispose_score_mot_TF_IDF_du_doc(question, corpus)
+    liste_mot_doc1 = []
+    liste_mot_doc_TF_IDF1 = []
+
+    taille = len(liste_mot_doc)
+    for i in range(taille):
+        if len(liste_mot_doc[i]) > 3:
+            liste_mot_doc1.append(liste_mot_doc[i])
+            liste_mot_doc_TF_IDF1.append(liste_mot_doc_TF_IDF[i])
 
     #Permet d'obtenir la position du score max TF IDF dans la liste mot ou ajouter dans un dico pour renvoyer valeur max apres
     
     index = 0
-    for i in range(len(liste_mot_doc_TF_IDF)):
-        if liste_mot_doc_TF_IDF[index] < liste_mot_doc_TF_IDF[i]:
+    for i in range(len(liste_mot_doc_TF_IDF1)):
+        if liste_mot_doc_TF_IDF1[index] < liste_mot_doc_TF_IDF1[i]:
             index = i
-    
 
-    mot = liste_mot_doc[index]
+    mot = liste_mot_doc1[index]
 
     phrase = trouver_occurrence_et_phrase(corpus, mot) # forme brute
     print("Réponse brute :", phrase) # Afficher forme brute

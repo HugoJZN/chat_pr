@@ -48,7 +48,7 @@ def count_word(texte, word):
     return count
 
 
-#Fonction servant à renvoyer le TD-IDF
+#Fonction servant à renvoyer le TF
 def TF(texte): 
     liste_word = []
     word_index = {}
@@ -110,7 +110,7 @@ def IDF(repertoire):
                 contenu = fichier_IDF.read()
                 if mot in contenu:
                     occurence += 1
-        calcul_idf = math.log10((taille / occurence) + 1)
+        calcul_idf = math.log10((taille / occurence)+1)
         dico[mot] = calcul_idf
     return dico
 
