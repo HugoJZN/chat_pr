@@ -110,7 +110,7 @@ def IDF(repertoire):
                 contenu = fichier_IDF.read()
                 if mot in contenu:
                     occurence += 1
-        calcul_idf = math.log10((taille / occurence)+1)
+        calcul_idf = math.log10((taille / occurence))
         dico[mot] = calcul_idf
     return dico
 

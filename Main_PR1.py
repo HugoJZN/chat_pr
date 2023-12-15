@@ -66,7 +66,7 @@ if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cle
 
 
 # Calcul du score TF-IDF pour les fichiers nettoyés
-
+Score_idf_cleaned = IDF("cleaned")
 Score_TF_IDF_CLEANED = (TF_IDF("cleaned"))
 #print(Score_TF_IDF_CLEANED)
 
@@ -259,7 +259,7 @@ def mot_question_et_document(question):
 def TF_IDF_question(question):
     #Crée un dico vide pour y stocker le vecteur TF_IDF de la question
     vecteur_TF_IDF_question = {}
-
+    l = {}
     #Appel une focntion qui va donner l'ensemble des mots de la questions
     #Et une qui va donner l'ensemble des mots de chaque fichier ainsi que la valeur de son IDF
     mots_questions = tokenisation_question(question)
@@ -268,7 +268,7 @@ def TF_IDF_question(question):
     for i in mots_questions:
         text += i + " "
 
-    mots_repertoire = IDF("cleaned")
+    mots_repertoire = Score_idf_cleaned
     # On appel la fonction qui donne les mots présent dans la quetion et dans le document
     mot_question_documents = mot_question_et_document(question)
 
@@ -277,9 +277,10 @@ def TF_IDF_question(question):
 
         #On vérifie si le mot est présent à la fois dans la question et dans le texte
         if mots in mot_question_documents:
-            score_TF = TF(text)
+            score_TF = TF(text) 
         #Si oui on calcul sa valeur et on l'ajoute au dico des vecteurs
-            vecteur_TF_IDF_question[mots] = score_TF[mots] * mots_repertoire[mots]
+            vecteur_TF_IDF_question[mots] = (score_TF[mots] * mots_repertoire[mots]) / len(mots_questions)
+            l[mots] = score_TF[mots] * mots_repertoire[mots] / len(mots_questions)
 
         #Sinon sa valeur est égal à zéro
         else:
@@ -328,9 +329,7 @@ def transforme_dico(dico):
 # Exercice 5:  
 def calcul_document_plus_pertinent(question):
     TD_IDF_tous_fichier = transforme_dico(Score_TF_IDF_CLEANED)
-    print(Score_TF_IDF_CLEANED["climat"])
     TF_IDF_question1 = TF_IDF_question(question)
-    print(TF_IDF_question1["climat"])
     dico_similarite = {}
     for i in TD_IDF_tous_fichier:
             similarite = similarite_cosinus(TD_IDF_tous_fichier[i], TF_IDF_question1)
@@ -483,7 +482,7 @@ def generer_reponse(question, corpus):
 # Exemple d'utilisation
 
 
-question = "Peux-tu me dire comment une nation peut-elle prendre soin d'elle ?"
+question = "Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"
 document = calcul_document_plus_pertinent(question)
 reponse_affinee = generer_reponse(question, document )
 
