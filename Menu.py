@@ -31,7 +31,7 @@ def menu_general():
 
 
 # On définit une fonction qui a pour rôle de présenter un menu, servant de lien entre différentes fonctions.
-def menu():
+def menu_part1():
     clear_terminal()
     print("-"*80)
     # On propose à l'utilisateur de choisir l'option qu'il souhaite exécuter.
@@ -43,27 +43,27 @@ def menu():
           "- Tapez 5 : Savoir quel président a été le premier à parler de l'écologie.\n"
           "- Tapez 6 : Obtenir l'ensemble des mots importants évoqués par tous les présidents.\n"
           "- Tapez esc : Quitter le menu.")
-    choice = input("Choix : ")
+    choice2 = input("Choix : ")
 
 
     clear_terminal()
     print("-"*80)
 
     # Selon le choix de l'utilisateur, on appelle la fonction appropriée.
-    if choice == "1":
+    if choice2 == "1":
         n = int(input("indiquez le nombre de valeurs que vous voulez du nombre de mot non importants dans le repertoire: "))
         print(n_mot_moins_important(n))
-    elif choice == "2":
+    elif choice2 == "2":
         print(TF_IDF_eleve())
-    elif choice == "3":
+    elif choice2 == "3":
         print(word_chirac())
-    elif choice == "4":
+    elif choice2 == "4":
         print(pr_nation())
-    elif choice == "5":
+    elif choice2 == "5":
         print(one_president_climt())
-    elif choice == "6":
+    elif choice2 == "6":
         print(mots_evoque_pr())
-    elif choice.upper() == "\x1b":
+    elif choice2.upper() == "\x1b":
         print("Au revoir")
         return
     
@@ -72,10 +72,10 @@ def menu():
     # Si l'utilisateur entre une option incorrecte, on lui propose de réessayer.
     else:
         re = input("Option invalide. Voulez-vous réessayer ?\n"
-                      "- Tapez 1 pour Oui\n"
-                      "- Tapez 2 pour Non\n")
+                   "- Tapez 1 pour Oui\n"
+                   "- Tapez 2 pour Non\n")
         if re == "1":
-            menu()
+            menu_part1()
         else:
             print("Au revoir.")
             return
@@ -83,12 +83,50 @@ def menu():
     # On propose à l'utilisateur d'essayer une autre option.
     re1 = input("Voulez-vous essayer une autre option ?\n"
                    "- Tapez 1 pour Oui\n"
-                   "- Tapez 2 pour Non\n")
+                   "- Tapez 2 pour Non\n"
+                   "- Tapez 3 pour retourner au menu principal\n")
     if re1 == "1":
-        menu()
+        menu_part1()
+    elif re1 == "3":
+        menu_general()
     else:
-        print("Au revoir.")
+        print("Au revoir")
+        return
+
+
+
+# On définit une fonction qui a pour rôle de présenter un deuxième menu afin d'appeler la fonctionde la partie 2
+def menu_part2():
+    clear_terminal()
+    print("-" * 80)
+    # On propose à l'utilisateur de poser une question.
+    print("A quelle question voulez-vous que je réponde ? :\n")
+    question = input("Question :")
+
+    clear_terminal()
+    print("-" * 80)
+    # On fait appel aux fonctions qui permettent de répondre à la question.
+    document = calcul_document_plus_pertinent(question)
+    reponse_affinee = generer_reponse(question, document)
+    # On affiche le résultat.
+    print("Question :", question, "\n")
+    print("Réponse affinée :", reponse_affinee, "\n")
+
+    # On propose à l'utilisateur de poser une autre question.
+    re2 = input("Voulez-vous poser une autre question ?\n"
+                "- Tapez 1 pour Oui\n"
+                "- Tapez 2 pour Non\n"
+                "- Tapez 3 pour retourner au menu principal\n")
+    if re2 == "1":
+        menu_part2()
+    elif re2 == "3":
+        menu_general()
+    else:
+        print("Au revoir")
+        return
+
+
+
 
 # On appelle la fonction menu pour démarrer le programme.
-menu()
-
+menu_general()
