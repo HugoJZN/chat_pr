@@ -1,5 +1,34 @@
 from Main_PR1 import *
 
+def menu_general():
+    clear_terminal()
+    print("-" * 80)
+    # On propose à l'utilisateur de choisir l'option qu'il souhaite exécuter.
+    print("Que souhaitez-vous faire ?\n"
+          "- Tapez 1 : Acceder au menu de la partie 1.\n"
+          "- Tapez 2 : Acceder au menu de la partie 2.")
+    choice1 = input("Choix :")
+
+    clear_terminal()
+    print("-" * 80)
+    # Selon le choix de l'utilisateur, on appelle le menu appropriée.
+    if choice1 == "1":
+        menu_part1()
+    elif choice1 == "2":
+        menu_part2()
+        return
+
+    # Si l'utilisateur entre une option incorrecte, on lui propose de réessayer.
+    else:
+        re3 = input("Option invalide. Voulez-vous réessayer ?\n"
+                   "- Tapez 1 pour Oui\n"
+                   "- Tapez 2 pour Non\n")
+        if re3 == "1":
+            menu_general()
+        else:
+            print("Au revoir.")
+            return
+
 
 # On définit une fonction qui a pour rôle de présenter un menu, servant de lien entre différentes fonctions.
 def menu():
