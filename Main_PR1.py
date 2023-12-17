@@ -70,7 +70,6 @@ Score_idf_cleaned = IDF("cleaned")
 Score_TF_IDF_CLEANED = (TF_IDF("cleaned"))
 #print(Score_TF_IDF_CLEANED)
 
-
 # Calcul de la somme des scores TF-IDF pour chaque mot
 
 liste_mot_non_important = []
@@ -390,7 +389,10 @@ def affiner_reponse(question, ph_brute):
     }
 
     # Extraire le texte brut de la réponse générée
-    reponse = ph_brute.strip()
+    reponse = ph_brute
+    if reponse[0] == "\n":
+        rest_reponse = reponse[1:]
+        reponse = rest_reponse
 
     # Trouver la forme de la question
     forme_question = None
@@ -406,7 +408,10 @@ def affiner_reponse(question, ph_brute):
         reponse = modele_reponse.format(reponse)
 
     # Mettre en majuscule la première lettre de la réponse
-    reponse = reponse.capitalize()
+    if  ord(reponse[0]) <= 122 and ord(reponse[0]) >= 97:
+        premier_caractere = chr(ord(reponse[0]) - 32)
+        rest_reponse = premier_caractere + reponse[1:]
+        reponse = rest_reponse
 
     # Ajouter un point à la fin de la réponse
     if reponse[-1] != ('.'):
