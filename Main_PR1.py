@@ -424,7 +424,7 @@ def affiner_reponse(question, ph_brute):
 
 
 def dispose_score_mot_TF_IDF_du_doc(question, doc):
-
+    l = {}
     liste_mot = tokenisation_question(question)
     liste_mot_doc = []
     liste_mot_doc_TF_IDF = []
@@ -474,7 +474,6 @@ def generer_reponse(question, corpus):
     mot = liste_mot_doc1[index]
 
     phrase = trouver_occurrence_et_phrase(corpus, mot) # forme brute
-    print("Réponse brute :", phrase) # Afficher forme brute
     
     phrase_affiner = affiner_reponse(question, phrase) # forme affiner, tulisation du dictionnaire
 
