@@ -29,7 +29,7 @@ c'est cette fonction qui lance la fenêtre du menu.
 
 - Question Part 1:
 
-  Refroupe les fonctions permettant le fonctionnement de la partie 1
+  Regroupe les fonctions permettant le fonctionnement de la partie 1
 
 - Question Part 2:
 
@@ -45,4 +45,5 @@ peuvent survenir lors de l'utilisation sur PyCharm en
 raison de différences d'environnement.
 
 ## Rapport fichier
-[Rapport_Projet_Python.pdf](https://github.com/HugoJZN/chat_pr/files/13709339/Rapport_Projet_Python.pdf)
+[Rapport_Projet_Python.pdf](https://github.com/HugoJZN/chat_pr/files/13709447/Rapport_Projet_Python.pdf)
+
