@@ -114,14 +114,11 @@ def menu_part2():
     # On propose à l'utilisateur de poser une autre question.
     re2 = input("Voulez-vous poser une autre question ?\n"
                 "- Tapez 1 pour Oui\n"
-                "- Tapez 2 pour Non\n"
-                "- Tapez 3 pour retourner au menu principal\n")
+                "- Tapez 2 pour retourner au menu principal\n")
     if re2 == "1":
         menu_part2()
-    elif re2 == "3":
-        menu_general()
     else:
-        print("Au revoir")
+        menu_general()
         return
 
 
