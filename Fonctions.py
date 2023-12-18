@@ -71,7 +71,7 @@ def dico_global_dossier(repertoire):
     dico_global_mot = {}
     contenue_texte = ""
     for i in f_texte:
-        with open("./cleaned/{}".format(i), "r") as fichier1:
+        with open("./cleaned/{}".format(i), "r", encoding="utf-8") as fichier1:
             texte1 = fichier1.read()
             contenue_texte += texte1 + " " 
     dico_global_mot = TF(contenue_texte)
@@ -84,7 +84,7 @@ def dico_global_president(president):
     contenue_texte = ""
     for i in f_texte:
         if president in i:
-            with open("./cleaned/{}".format(i), "r") as fichier1:
+            with open("./cleaned/{}".format(i), "r", encoding="utf-8") as fichier1:
                 texte1 = fichier1.read()
                 contenue_texte += texte1 + " " 
     dico_global_mot = TF(contenue_texte)
@@ -106,7 +106,7 @@ def IDF(repertoire):
     for mot in liste_contenu:
         occurence = 0
         for i in files_names:
-            with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
+            with open('./{}/{}'.format(repertoire, i), 'r', encoding="utf-8") as fichier_IDF :
                 contenu = fichier_IDF.read()
                 contenu = contenu.split()
                 if mot in contenu:
