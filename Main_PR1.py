@@ -36,8 +36,10 @@ presidents_et_dates = {
 # on trouve le chemin pour acceder à cleaned, nouveau repertorie
 directory_cleaned = "./cleaned"
 
+os.makedirs(directory_cleaned, exist_ok=True)
+
 # Vérification du contenu du dossier 'cleaned'
-contenue_dossier = os.listdir("./cleaned/")
+contenue_dossier = list_of_files(directory_cleaned, "txt")
 
 
 # Si le dossier 'cleaned' est vide, nettoyage des fichiers de 'speechees' et création de fichiers dans 'cleaned'
