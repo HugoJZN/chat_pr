@@ -33,7 +33,7 @@ c'est cette fonction qui lance la fenêtre du menu.
 
 - Question Part 2:
 
-  Regroupe les fonctions permettant le fonctionnement de la partie 1
+  Regroupe les fonctions permettant le fonctionnement de la partie 2
 
 Éventuels dépendances à installer: Aucune pour l'instant
 
