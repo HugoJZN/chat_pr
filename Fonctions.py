@@ -126,7 +126,7 @@ def TF_IDF(repertoire):
         score_tf_idf = []
         for i in f_texte:
             
-            with open("./cleaned/{}".format(i), "r") as fichier1:
+            with open("./cleaned/{}".format(i), "r", encoding="utf-8") as fichier1:
                 texte1 = fichier1.read()
             
             contenue_mot = texte1.split()
