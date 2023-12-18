@@ -185,5 +185,3 @@ def somme(tab):
     for i in tab:
         res += i
     return res
-    
-
