@@ -108,9 +108,10 @@ def IDF(repertoire):
         for i in files_names:
             with open('./{}/{}'.format(repertoire, i), 'r') as fichier_IDF :
                 contenu = fichier_IDF.read()
+                contenu = contenu.split()
                 if mot in contenu:
                     occurence += 1
-        calcul_idf = math.log10((taille / occurence)+1)
+        calcul_idf = math.log10((taille / occurence))
         dico[mot] = calcul_idf
     return dico
 
