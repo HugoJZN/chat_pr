@@ -101,7 +101,7 @@ contenue = dico_global_dossier("./cleaned") [1]
 #print(extract_president_names(files_names))
 
 
-
+# Pour afficher un terminal propre
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
