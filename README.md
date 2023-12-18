@@ -27,6 +27,13 @@ Le fichier Menu contient la fonction menu. Cette fonction est responsable
 de l'affichage du menu et de l'interaction avec l'utilisateur. 
 c'est cette fonction qui lance la fenêtre du menu.
 
+- Question Part 1:
+
+  Refroupe les fonctions permettant le fonctionnement de la partie 1
+
+- Question Part 2:
+
+  Regroupe les fonctions permettant le fonctionnement de la partie 1
 
 Éventuels dépendances à installer: Aucune pour l'instant
 
