@@ -32,9 +32,14 @@ presidents_et_dates = {
 
 #Programme principale 
 
+
+# on trouve le chemin pour acceder à cleaned, nouveau repertorie
+directory_cleaned = "./cleaned"
+
+# Vérifiez si le répertoire n'existe pas déjà, puis créez-le
+os.makedirs(directory_cleaned, exist_ok=True)
+
 # Vérification du contenu du dossier 'cleaned'
-
-
 contenue_dossier = os.listdir("./cleaned/")
 
 
