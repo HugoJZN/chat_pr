@@ -3,7 +3,6 @@ from Question_part1 import *
 from Question_part2 import *
 
 
-
 def menu_general():
     clear_terminal()
     print("-" * 80)
@@ -49,31 +48,33 @@ def menu_part1():
     # Selon le choix de l'utilisateur, on appelle la fonction appropriée.
     if choice2 == "1":
         print(n_mot_moins_important())
+        reesayer()
     elif choice2 == "2":
         print(TF_IDF_eleve())
+        reesayer()
     elif choice2 == "3":
         print(mot_chirac())
+        reesayer()
     elif choice2 == "4":
         print(pr_nation())
+        reesayer()
     elif choice2 == "5":
         print(un_president_climt())
-    elif choice2.upper() == "\x1b":
+        reesayer()
+    else:
         menu_general()
     
  
-
+def reesayer():
     # Si l'utilisateur entre une option incorrecte, on lui propose de réessayer.
+    re = input("Option invalide. Voulez-vous réessayer ?\n"
+                "- Tapez 1 pour Oui\n"
+                "- Tapez 2 pour Non\n")
+    if re == "1":
+        menu_part1()
     else:
-        re = input("Option invalide. Voulez-vous réessayer ?\n"
-                   "- Tapez 1 pour Oui\n"
-                   "- Tapez 2 pour Non\n")
-        if re == "1":
-            menu_part1()
-        else:
-            print("Au revoir.")
-            return
-
-
+        print("Au revoir.")
+        return
 
 
 # On définit une fonction qui a pour rôle de présenter un deuxième menu afin d'appeler la fonctionde la partie 2
