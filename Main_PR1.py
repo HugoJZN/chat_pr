@@ -167,7 +167,7 @@ def pr_nation():
 
 # 5. Indiquer le premier président à parler du climat et/ou de l’écologie
 
-def one_president_climt():
+def un_president_climt():
     liste_president_climat = []
 
     for i in files_names:
@@ -180,7 +180,7 @@ def one_president_climt():
                     liste_president_climat.append(nom_president)
     return ("Les présidents à parler du climat et/ou de l’écologie sont", (liste_president_climat))
 
-#print(one_president_climt())
+#print(un_president_climt())
 
 # Partie 2 du projet
 
