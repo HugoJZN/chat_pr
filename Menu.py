@@ -67,7 +67,7 @@ def menu_part1():
  
 def reesayer():
     # Si l'utilisateur entre une option incorrecte, on lui propose de réessayer.
-    re = input("Option invalide. Voulez-vous réessayer ?\n"
+    re = input(" Voulez-vous réessayer ?\n"
                 "- Tapez 1 pour Oui\n"
                 "- Tapez 2 pour Non\n")
     if re == "1":
