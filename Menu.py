@@ -57,7 +57,7 @@ def menu_part1():
     elif choice2 == "2":
         print(TF_IDF_eleve())
     elif choice2 == "3":
-        print(word_chirac())
+        print(mot_chirac())
     elif choice2 == "4":
         print(pr_nation())
     elif choice2 == "5":
