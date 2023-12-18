@@ -5,8 +5,10 @@ def menu_general():
     print("-" * 80)
     # On propose à l'utilisateur de choisir l'option qu'il souhaite exécuter.
     print("Que souhaitez-vous faire ?\n"
-          "- Tapez 1 : Acceder au menu de la partie 1.\n"
-          "- Tapez 2 : Acceder au menu de la partie 2.")
+          "\n"
+          "- Tapez 1 : Acceder au menu de la partie 1 où plusieurs fonctionnalités sont proposés.\n"
+          "\n"
+          "- Tapez 2 : Acceder au menu chatbot d'interaction avec l'IA.")
     choice1 = input("Choix :")
 
     clear_terminal()
@@ -41,7 +43,6 @@ def menu_part1():
           "- Tapez 3 : Trouver les mots les plus fréquemment utilisés par le président Chirac.\n"
           "- Tapez 4 : Obtenir le nom des présidents parlant le plus souvent de la Nation.\n"
           "- Tapez 5 : Savoir quel président a été le premier à parler de l'écologie.\n"
-          "- Tapez 6 : Obtenir l'ensemble des mots importants évoqués par tous les présidents.\n"
           "- Tapez esc : Quitter le menu.")
     choice2 = input("Choix : ")
 
@@ -61,8 +62,6 @@ def menu_part1():
         print(pr_nation())
     elif choice2 == "5":
         print(one_president_climt())
-    elif choice2 == "6":
-        print(mots_evoque_pr())
     elif choice2.upper() == "\x1b":
         print("Au revoir")
         return
@@ -124,8 +123,6 @@ def menu_part2():
     else:
         print("Au revoir")
         return
-
-
 
 
 # On appelle la fonction menu pour démarrer le programme.
