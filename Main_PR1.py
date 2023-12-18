@@ -80,8 +80,8 @@ liste_mot_non_important = []
 dico_moyenne = {}
 for i in Score_TF_IDF_CLEANED.items():
     nb = 0
-    for values in i[1]:
-        nb += values
+    for valeur in i[1]:
+        nb += valeur
     dico_moyenne[i[0]] = nb   # 
 
 # Tri des mots par leur score moyen TF-IDF
@@ -125,13 +125,13 @@ def n_mot_moins_important(n):
 # 2 Afficher le(s) mot(s) ayant le score TF-IDF le plus élevé
 
 def TF_IDF_eleve():
-    list_mot = list(dico_mot_im_trie)
-    return ("le mot ayant le score TF-IDF le plus élevé est ", list_mot[-1])
+    liste_mot = list(dico_mot_im_trie)
+    return ("le mot ayant le score TF-IDF le plus élevé est ", liste_mot[-1])
 #print(TF_IDF_eleve)
 
 # 3 Afficher le(s) mot(s) le(s) plus répété(s) par le président Chirac
 
-def word_chirac():
+def mot_chirac():
     dico_chirac = dico_global_president("Chirac")
     mot_max = max_dico_valeur(dico_chirac)
     return ("Le mot le plus repete par le president Chirac dans le premier texte est", mot_max)
