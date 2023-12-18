@@ -282,12 +282,14 @@ def TF_IDF_question(question):
 
 # 4.) Calcul vectorielle
 
+# Calcul le produit scalaire entre deux vecteurs et le retourne
 def produit_scalaire(A, B):
     somme = 0
     for i in A:
         somme = somme + (A[i] * B[i])
     return somme 
 
+# Calcul la norme d'un vecteur et la retourne
 def norme_vecteur(A):
     somme = 0
     for i in A:
@@ -295,6 +297,7 @@ def norme_vecteur(A):
     somme = sqrt(somme)
     return somme
 
+# Calcul la similarité cosinus entre deux vecteurs et la retourne
 def similarite_cosinus(A, B):
     produit_scalaire_ab = produit_scalaire(A, B)
     norme_a = norme_vecteur(A)
