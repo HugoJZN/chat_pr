@@ -61,7 +61,7 @@ def menu_part1():
     elif choice2 == "4":
         print(pr_nation())
     elif choice2 == "5":
-        print(one_president_climt())
+        print(un_president_climt())
     elif choice2.upper() == "\x1b":
         print("Au revoir")
         return
