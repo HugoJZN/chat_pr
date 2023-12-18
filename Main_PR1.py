@@ -68,8 +68,6 @@ if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cle
 # Calcul du score TF-IDF pour les fichiers nettoyés
 Score_idf_cleaned = IDF("cleaned")
 Score_TF_IDF_CLEANED = (TF_IDF("cleaned"))
-print(Score_TF_IDF_CLEANED["roi"])
-#print(Score_TF_IDF_CLEANED)
 
 # Calcul de la somme des scores TF-IDF pour chaque mot
 
@@ -457,24 +455,6 @@ def generer_reponse(question, corpus):
     phrase_affiner = affiner_reponse(question, phrase) # forme affiner, tulisation du dictionnaire
 
     return phrase_affiner
-
-
-
-# Affichage deuxieme partie du projet
-
-# Exemple d'utilisation
-
-
-question = "Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"
-document = calcul_document_plus_pertinent(question)
-reponse_affinee = generer_reponse(question, document )
-
-
-# Afficher le résultat
-
-print("Question :", question)
-print("Réponse affinée :", reponse_affinee)
-
 
 
 def partie2():
