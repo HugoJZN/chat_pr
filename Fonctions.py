@@ -116,7 +116,6 @@ def IDF(repertoire):
     return dico
 
 #Fonction TF_IDF 
-
 def TF_IDF(repertoire):
     dico_TF_IDF = {}
     dico_IDF = IDF(repertoire)
@@ -141,6 +140,7 @@ def TF_IDF(repertoire):
         dico_TF_IDF[mot] = score_tf_idf
     return dico_TF_IDF
 
+# fonction renvoyant la valeur min d'une liste
 def min_tab(tab):
     if len(tab) <= 0:
         return None, None  # Retourne None si le tableau est vide
@@ -151,7 +151,7 @@ def min_tab(tab):
                 valeur_min = tab[i]
         return valeur_min
     
-
+# fonction renvoyant la valeur min d'un dico
 def min_dico_valeur(dico):
     if len(dico) <= 0:
         return None  # Retourne None si le dictionnaire est vide
@@ -165,7 +165,7 @@ def min_dico_valeur(dico):
 
         return cle_min
     
-
+# fonction renvoyant la valeur max d'un dico
 def max_dico_valeur(dico):
     if len(dico) <= 0:
         return None  # Retourne None si le dictionnaire est vide
@@ -179,6 +179,7 @@ def max_dico_valeur(dico):
 
         return cle_max
 
+# fonction d'addtion
 def somme(tab):
     res = 0
     for i in tab:
