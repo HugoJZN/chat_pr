@@ -45,7 +45,7 @@ contenue_dossier = os.listdir("./cleaned/")
 if len(contenue_dossier) < 8: # Mettre les fichier de speech convertie dans cleaned
     #Parcour les differents fichiers de speechees
     for i in files_names:
-        with open("./speeches/{}".format(i), "r") as fichier:
+        with open("./speeches/{}".format(i), "r", encoding="utf-8") as fichier:
             texte = fichier.read()
         # Nettoyage des textes en convertissant en minuscules et supprimant la ponctuation
         # Création de nouveaux fichiers dans le dossier 'cleaned' avec le texte nettoyé
@@ -62,7 +62,7 @@ if len(contenue_dossier) < 8: # Mettre les fichier de speech convertie dans clea
                 text_cleaned += texte[a]
         # print(texte)         Affichage des textes
         # print(text_cleaned)  Affichage des textes
-        nouveau_fichier = open("./cleaned/{}".format(i), "a")
+        nouveau_fichier = open("./cleaned/{}".format(i), "a", encoding="utf-8")
         nouveau_fichier.write(text_cleaned)
         nouveau_fichier.close()
 
@@ -143,7 +143,7 @@ def pr_nation():
     listes_president = []
     dico_nation = {}
     for i in files_names:
-        with open ("./cleaned/{}".format(i), 'r') as fichier:
+        with open ("./cleaned/{}".format(i), 'r', encoding="utf-8") as fichier:
             contenu = fichier.read()
         texte_nation = contenu.split()
 
@@ -168,7 +168,7 @@ def un_president_climt():
     liste_president_climat = []
 
     for i in files_names:
-        with open("./cleaned/{}".format(i), 'r') as fichier:
+        with open("./cleaned/{}".format(i), 'r', encoding="utf-8") as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
             nom_president = (i[11:-4])
@@ -337,7 +337,7 @@ def calcul_document_plus_pertinent(question):
 
 def trouver_occurrence_et_phrase(document, mot):
     # Lire le contenu du document
-    with open( "./speeches/" + document, 'r') as file:
+    with open( "./speeches/" + document, 'r', encoding="utf-8") as file:
         contenu_document = file.read()
 
     # Trouver la position du mot dans le contenu du document
