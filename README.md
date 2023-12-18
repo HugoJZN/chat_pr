@@ -37,3 +37,5 @@ la plateforme Visual Studio Code. Des problèmes éventuels
 peuvent survenir lors de l'utilisation sur PyCharm en 
 raison de différences d'environnement.
 
+## Rapport fichier
+[Rapport_Projet_Python.pdf](https://github.com/HugoJZN/chat_pr/files/13709339/Rapport_Projet_Python.pdf)
