@@ -1,4 +1,8 @@
 from Main_PR1 import *
+from Question_part1 import *
+from Question_part2 import *
+
+
 
 def menu_general():
     clear_terminal()
@@ -8,7 +12,9 @@ def menu_general():
           "\n"
           "- Tapez 1 : Acceder au menu de la partie 1 où plusieurs fonctionnalités sont proposés.\n"
           "\n"
-          "- Tapez 2 : Acceder au menu chatbot d'interaction avec l'IA.")
+          "- Tapez 2 : Acceder au menu chatbot d'interaction avec l'IA.\n"
+          "\n"
+          "_ Tapez echap pour quitter le menu")
     choice1 = input("Choix :")
 
     clear_terminal()
@@ -18,18 +24,8 @@ def menu_general():
         menu_part1()
     elif choice1 == "2":
         menu_part2()
-        return
-
-    # Si l'utilisateur entre une option incorrecte, on lui propose de réessayer.
     else:
-        re3 = input("Option invalide. Voulez-vous réessayer ?\n"
-                   "- Tapez 1 pour Oui\n"
-                   "- Tapez 2 pour Non\n")
-        if re3 == "1":
-            menu_general()
-        else:
-            print("Au revoir.")
-            return
+        return
 
 
 # On définit une fonction qui a pour rôle de présenter un menu, servant de lien entre différentes fonctions.
@@ -38,12 +34,12 @@ def menu_part1():
     print("-"*80)
     # On propose à l'utilisateur de choisir l'option qu'il souhaite exécuter.
     print("Que souhaitez-vous faire ?\n"
-          "- Tapez 1 : Obtenir les mots moins importants des fichiers.\n"
+          "- Tapez 1 : Obtenir les mots non importants des fichiers.\n"
           "- Tapez 2 : Afficher les mots avec les TF-IDF les plus élevés.\n"
           "- Tapez 3 : Trouver les mots les plus fréquemment utilisés par le président Chirac.\n"
           "- Tapez 4 : Obtenir le nom des présidents parlant le plus souvent de la Nation.\n"
           "- Tapez 5 : Savoir quel président a été le premier à parler de l'écologie.\n"
-          "- Tapez esc : Quitter le menu.")
+          "- Tapez esc : Retour au menu principal le menu.")
     choice2 = input("Choix : ")
 
 
@@ -52,8 +48,7 @@ def menu_part1():
 
     # Selon le choix de l'utilisateur, on appelle la fonction appropriée.
     if choice2 == "1":
-        n = int(input("indiquez le nombre de valeurs que vous voulez du nombre de mot non importants dans le repertoire: "))
-        print(n_mot_moins_important(n))
+        print(n_mot_moins_important())
     elif choice2 == "2":
         print(TF_IDF_eleve())
     elif choice2 == "3":
@@ -63,8 +58,7 @@ def menu_part1():
     elif choice2 == "5":
         print(un_president_climt())
     elif choice2.upper() == "\x1b":
-        print("Au revoir")
-        return
+        menu_general()
     
  
 
@@ -79,18 +73,6 @@ def menu_part1():
             print("Au revoir.")
             return
 
-    # On propose à l'utilisateur d'essayer une autre option.
-    re1 = input("Voulez-vous essayer une autre option ?\n"
-                   "- Tapez 1 pour Oui\n"
-                   "- Tapez 2 pour Non\n"
-                   "- Tapez 3 pour retourner au menu principal\n")
-    if re1 == "1":
-        menu_part1()
-    elif re1 == "3":
-        menu_general()
-    else:
-        print("Au revoir")
-        return
 
 
 
