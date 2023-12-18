@@ -68,6 +68,7 @@ if len(contenue_dossier) <= 8: # Mettre les fichier de speech convertie dans cle
 # Calcul du score TF-IDF pour les fichiers nettoyés
 Score_idf_cleaned = IDF("cleaned")
 Score_TF_IDF_CLEANED = (TF_IDF("cleaned"))
+print(Score_TF_IDF_CLEANED["roi"])
 #print(Score_TF_IDF_CLEANED)
 
 # Calcul de la somme des scores TF-IDF pour chaque mot
@@ -164,33 +165,19 @@ def pr_nation():
 # 5. Indiquer le premier président à parler du climat et/ou de l’écologie
 
 def one_president_climt():
-    dico_climat_eco = {}
+    liste_president_climat = []
 
     for i in files_names:
         with open("./cleaned/{}".format(i), 'r') as fichier:
             contenu = fichier.read()
             texte_mot_cleaned = contenu.split()
             nom_president = (i[11:-4])
-            for index in range(len(texte_mot_cleaned)):
-                if texte_mot_cleaned[index] == "climat" or texte_mot_cleaned[index] == "écologie":
-                    if not nom_president in dico_climat_eco.keys():
-                        dico_climat_eco[nom_president] = index
-    return ("Le premier président à parler du climat et/ou de l’écologie est", min_dico_valeur(dico_climat_eco))
+            if ("climat" in texte_mot_cleaned) or ("écologie" in texte_mot_cleaned) or ("écologique" in texte_mot_cleaned) :
+                if not nom_president in liste_president_climat:
+                    liste_president_climat.append(nom_president)
+    return ("Les présidents à parler du climat et/ou de l’écologie sont", (liste_president_climat))
 
 #print(one_president_climt())
-
-# 6. Hormis les mots dits « non importants », quel(s) est(sont) le(s) mot(s) que tous les présidents ont évoqués.
-
-def mots_evoque_pr():
-    mots_evoque = []
-    for score in Score_TF_IDF_CLEANED:
-        if min_tab(Score_TF_IDF_CLEANED[score]) != 0:
-            if somme(Score_TF_IDF_CLEANED[score]) >= 10:
-                mots_evoque.append(score)
-    return ("le(s) mot(s) que tous les présidents ont évoqués sont:",mots_evoque)
-
-#print(mots_evoque_pr())
-
 
 # Partie 2 du projet
 
@@ -455,26 +442,49 @@ def dispose_score_mot_TF_IDF_du_doc(question, doc):
 def generer_reponse(question, corpus):
     # dispose le score des mots du doc pertinent dans une liste_mot et sion score Tf_idf
     liste_mot_doc, liste_mot_doc_TF_IDF = dispose_score_mot_TF_IDF_du_doc(question, corpus)
-    liste_mot_doc1 = []
-    liste_mot_doc_TF_IDF1 = []
-
-    taille = len(liste_mot_doc)
-    for i in range(taille):
-        if len(liste_mot_doc[i]) > 3:
-            liste_mot_doc1.append(liste_mot_doc[i])
-            liste_mot_doc_TF_IDF1.append(liste_mot_doc_TF_IDF[i])
 
     #Permet d'obtenir la position du score max TF IDF dans la liste mot ou ajouter dans un dico pour renvoyer valeur max apres
     
     index = 0
-    for i in range(len(liste_mot_doc_TF_IDF1)):
-        if liste_mot_doc_TF_IDF1[index] < liste_mot_doc_TF_IDF1[i]:
+    for i in range(len(liste_mot_doc_TF_IDF)):
+        if liste_mot_doc_TF_IDF[index] < liste_mot_doc_TF_IDF[i]:
             index = i
 
-    mot = liste_mot_doc1[index]
+    mot = liste_mot_doc[index]
 
     phrase = trouver_occurrence_et_phrase(corpus, mot) # forme brute
     
     phrase_affiner = affiner_reponse(question, phrase) # forme affiner, tulisation du dictionnaire
 
     return phrase_affiner
+
+
+
+# Affichage deuxieme partie du projet
+
+# Exemple d'utilisation
+
+
+question = "Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"
+document = calcul_document_plus_pertinent(question)
+reponse_affinee = generer_reponse(question, document )
+
+
+# Afficher le résultat
+
+print("Question :", question)
+print("Réponse affinée :", reponse_affinee)
+
+
+
+def partie2():
+
+    question = input(" Posez une question ")
+    document = calcul_document_plus_pertinent(question)
+    reponse_affinee = generer_reponse(question, document )
+
+    # Afficher le résultat
+
+    print("Question :", question)
+    print("Réponse affinée :", reponse_affinee)
+
