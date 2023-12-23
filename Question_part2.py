@@ -67,7 +67,6 @@ def mot_question_et_document(question):
 def TF_IDF_question(question):
     #Crée un dico vide pour y stocker le vecteur TF_IDF de la question
     vecteur_TF_IDF_question = {}
-    l = {}
     #Appel une focntion qui va donner l'ensemble des mots de la questions
     #Et une qui va donner l'ensemble des mots de chaque fichier ainsi que la valeur de son IDF
     mots_questions = tokenisation_question(question)
@@ -88,7 +87,6 @@ def TF_IDF_question(question):
             score_TF = TF(text) 
         #Si oui on calcul sa valeur et on l'ajoute au dico des vecteurs
             vecteur_TF_IDF_question[mots] = (score_TF[mots] * mots_repertoire[mots]) / len(mots_questions)
-            l[mots] = score_TF[mots] * mots_repertoire[mots] / len(mots_questions)
 
         #Sinon sa valeur est égal à zéro
         else:
@@ -121,6 +119,9 @@ def similarite_cosinus(A, B):
     produit_scalaire_ab = produit_scalaire(A, B)
     norme_a = norme_vecteur(A)
     norme_b = norme_vecteur(B)
+    # On verifie si norme a ou b egal 0 pour ne pas provoquer d'erreur
+    if norme_a == 0 or norme_b == 0:
+        return 0
     res = (produit_scalaire_ab/(norme_a*norme_b))
     return res
 
@@ -145,6 +146,9 @@ def calcul_document_plus_pertinent(question):
     for i in TD_IDF_tous_fichier:
             similarite = similarite_cosinus(TD_IDF_tous_fichier[i], TF_IDF_question1)
             dico_similarite[i] = similarite
+    # on affecte à la variable indice_max egal la premier cle du dico similarite pour ne pas provoquer d'erreur 
+    indice_max = list((dico_similarite.keys()))[0]
+
     max = 0
     for i in dico_similarite:
         if max < dico_similarite[i]:
@@ -195,9 +199,9 @@ def affiner_reponse(question, ph_brute):
 
     # Dictionnaire de formes de questions possibles et de modèles de réponses associés
     question_starters = {
+        "Peux-tu": "Oui, bien sûr! {}",
         "Comment": "Après analyse, {}",
-        "Pourquoi": "Car, {}",
-        "Peux-tu": "Oui, bien sûr! {}"
+        "Pourquoi": "Car, {}"
     }
 
     # Extraire le texte brut de la réponse générée
@@ -270,11 +274,14 @@ def generer_reponse(question, corpus):
 
     #Permet d'obtenir la position du score max TF IDF dans la liste mot ou ajouter dans un dico pour renvoyer valeur max apres
     
+    if len(liste_mot_doc) == 0:
+        return ("pas de reponse trouve")
+
     index = 0
     for i in range(len(liste_mot_doc_TF_IDF)):
         if liste_mot_doc_TF_IDF[index] < liste_mot_doc_TF_IDF[i]:
             index = i
-
+    
     mot = liste_mot_doc[index]
 
     phrase = trouver_occurrence_et_phrase(corpus, mot) # forme brute
@@ -294,3 +301,4 @@ def partie2():
 
     print("Question :", question)
     print("Réponse affinée :", reponse_affinee)
+
